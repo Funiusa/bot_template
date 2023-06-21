@@ -22,13 +22,3 @@ def start_bot():
 
 if __name__ == "__main__":
     start_bot()
-
-    # loop = asyncio.get_event_loop()
-    # try:
-    #     loop.run_until_complete(main())
-    # except KeyboardInterrupt:
-    #     pass
-    # finally:
-    #     loop.run_until_complete(dp.storage.close())
-    #     loop.run_until_complete(dp.storage.wait_closed())
-    #     loop.close()
