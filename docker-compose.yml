@@ -1,0 +1,30 @@
+version: '3.7'
+
+
+x-db-config: &db-config
+  DATABASE_NAME: ${DATABASE_NAME}
+  DATABASE_HOST: ${DATABASE_HOST}
+  DATABASE_PORT: ${DATABASE_PORT}
+  DATABASE_USER: ${DATABASE_USER}
+  POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+
+services:
+  api:
+    build: .
+    volumes:
+      - ./eternal:/app:cached
+      - ~/.ssh:/root/.ssh
+      - ~/.bash_history:/root/.bash_history
+    environment: &api-environment
+      ADMINS: ${ADMINS}
+      BOT_TOKEN: ${BOT_TOKEN}
+      PAY_TOKEN: ${PAY_TOKEN}
+      <<: *db-config
+    command: python run.py
+  db:
+    image: postgres:15.2-alpine
+    ports:
+      - 5432:5432
+    environment: *db-config
+
+
